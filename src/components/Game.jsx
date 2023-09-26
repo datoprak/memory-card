@@ -6,7 +6,7 @@ import Scoreboard from "./Scoreboard";
 
 const Game = () => {
   const [allPokemons, setAllPokemons] = useState([]);
-  const [firstPokemons, setFirstPokemons] = useState([]);
+  const [pokemonsArray, setPokemonsArray] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
@@ -35,7 +35,7 @@ const Game = () => {
           }
         });
       });
-      setFirstPokemons(showedPokemons);
+      setPokemonsArray(showedPokemons);
     };
 
     getStartingPokemons();
@@ -51,14 +51,39 @@ const Game = () => {
     } else {
       clickedPokemon.isClicked = true;
       setScore(prev => prev + 1);
-      console.log("shufflePokemons()");
+      shufflePokemons();
     }
+  };
+
+  const shufflePokemons = () => {
+    const newPokemons = [];
+    const newPokemonsArray = [];
+    allPokemons.forEach(poke => {
+      if (poke.isClicked) newPokemons.push(poke.id);
+    });
+    let randomId;
+    while (newPokemons.length < 12) {
+      randomId = Math.floor(Math.random() * 151 + 1);
+      while (!newPokemons.includes(randomId)) {
+        newPokemons.push(randomId);
+      }
+    }
+    newPokemons.forEach(rId => {
+      allPokemons.forEach(poke => {
+        if (poke.id === rId) {
+          poke.isShowed = true;
+          newPokemonsArray.push(poke);
+        }
+      });
+    });
+    newPokemonsArray.sort(() => Math.random() - 0.5);
+    setPokemonsArray(newPokemonsArray);
   };
 
   return (
     <main>
       <Scoreboard score={score} bestScore={bestScore} />
-      {firstPokemons.map(poke => {
+      {pokemonsArray.map(poke => {
         return <Card key={poke.id} poke={poke} handleClick={handleClick} />;
       })}
     </main>
