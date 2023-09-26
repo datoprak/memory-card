@@ -1,12 +1,12 @@
 import "./App.css";
 import Header from "./components/Header";
-import Main from "./components/Main";
+import Game from "./components/Game";
 
 function App() {
   return (
     <>
       <Header />
-      <Main />
+      <Game />
     </>
   );
 }

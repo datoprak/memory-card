@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { getAllPokemons } from "../utils/pokemon";
 
 import Card from "./Card";
+import Scoreboard from "./Scoreboard";
 
-const Main = () => {
+const Game = () => {
   const [allPokemons, setAllPokemons] = useState([]);
   const [firstPokemons, setFirstPokemons] = useState([]);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     getAllPokemons()
@@ -43,18 +46,22 @@ const Main = () => {
     console.log(clickedPokemon);
     if (clickedPokemon.isClicked === true) {
       console.log("you lose");
+      if (score > bestScore) setBestScore(score);
+      setScore(0);
     } else {
       clickedPokemon.isClicked = true;
+      setScore(prev => prev + 1);
       console.log("shufflePokemons()");
     }
   };
 
   return (
     <main>
+      <Scoreboard score={score} bestScore={bestScore} />
       {firstPokemons.map(poke => {
         return <Card key={poke.id} poke={poke} handleClick={handleClick} />;
       })}
     </main>
   );
 };
-export default Main;
+export default Game;
