@@ -1,8 +1,8 @@
-const Card = () => {
+const Card = ({ poke, handleClick }) => {
   return (
-    <div className="card">
-      <img src="" alt="random poke" />
-      <div className="poke-name">Pokemon name</div>
+    <div className="card" onClick={() => handleClick(poke.id)}>
+      <img src={poke.img} alt={poke.name} />
+      <div className="poke-name">{poke.name}</div>
     </div>
   );
 };
