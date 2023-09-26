@@ -63,46 +63,38 @@ function App() {
     });
     setScore(0);
     setIsEnd(false);
-    setIsStart(true);
+    getPokemonsArr();
   };
 
   return (
     <>
-      {loading ? (
-        <h1>LOADING</h1>
-      ) : (
-        <>
-          {isStart && (
-            <Modal
-              title={"WELCOME!"}
-              message={"Choose a difficulty:"}
-              buttons={[
-                { name: "easy", onClick: startGame },
-                { name: "hard", onClick: startGame },
-              ]}
-            />
-          )}
-          {isEnd && (
-            <Modal
-              title={"GAME OVER!"}
-              message={`Score: ${score} Best Score: ${bestScore}`}
-              buttons={[{ name: "restart", onClick: endGame }]}
-            />
-          )}
-          <Header />
-          <Scoreboard score={score} bestScore={bestScore} />
-          <Game
-            pokemons={pokemonsArray}
-            allPokemons={allPokemons}
-            getPokemonsArr={getPokemonsArr}
-            setIsEnd={setIsEnd}
-            score={score}
-            bestScore={bestScore}
-            setScore={setScore}
-            setBestScore={setBestScore}
-          />
-        </>
+      {isStart && (
+        <Modal
+          title={"WELCOME!"}
+          message={"Pokemon Memory Card Game"}
+          btn={{ name: "Start", onClick: startGame }}
+          loading={loading}
+        />
       )}
+      {isEnd && (
+        <Modal
+          title={"GAME OVER!"}
+          message={`Score: ${score} Best Score: ${bestScore}`}
+          btn={{ name: "Restart", onClick: endGame }}
+        />
+      )}
+      <Header />
+      <Scoreboard score={score} bestScore={bestScore} />
+      <Game
+        pokemons={pokemonsArray}
+        allPokemons={allPokemons}
+        getPokemonsArr={getPokemonsArr}
+        setIsEnd={setIsEnd}
+        score={score}
+        bestScore={bestScore}
+        setScore={setScore}
+        setBestScore={setBestScore}
+      />
     </>
   );
 }
