@@ -4,6 +4,7 @@ import Game from "./components/Game";
 import { useState, useEffect } from "react";
 import { getAllPokemons } from "./utils/pokemon";
 import Modal from "./components/Modal";
+import Scoreboard from "./components/Scoreboard";
 
 function App() {
   const [isStart, setIsStart] = useState(true);
@@ -11,6 +12,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [pokemonsArray, setPokemonsArray] = useState([]);
   const [allPokemons, setAllPokemons] = useState([]);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     getAllPokemons()
@@ -46,7 +49,6 @@ function App() {
 
     pokemonArr.sort(() => Math.random() - 0.5);
     setPokemonsArray(pokemonArr);
-    console.log(pokemonArr);
   };
 
   const startGame = () => {
@@ -55,6 +57,11 @@ function App() {
   };
 
   const endGame = () => {
+    allPokemons.forEach(poke => {
+      poke.isClicked = false;
+      poke.isShowed = false;
+    });
+    setScore(0);
     setIsEnd(false);
     setIsStart(true);
   };
@@ -78,16 +85,21 @@ function App() {
           {isEnd && (
             <Modal
               title={"GAME OVER!"}
-              message={"score:0 best score:0"}
+              message={`Score: ${score} Best Score: ${bestScore}`}
               buttons={[{ name: "restart", onClick: endGame }]}
             />
           )}
           <Header />
+          <Scoreboard score={score} bestScore={bestScore} />
           <Game
             pokemons={pokemonsArray}
             allPokemons={allPokemons}
             getPokemonsArr={getPokemonsArr}
             setIsEnd={setIsEnd}
+            score={score}
+            bestScore={bestScore}
+            setScore={setScore}
+            setBestScore={setBestScore}
           />
         </>
       )}
