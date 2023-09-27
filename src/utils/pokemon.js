@@ -16,7 +16,6 @@ class Pokemon {
     this.id = pokemon.id;
     this.name = pokemon.name;
     this.img = pokemon.sprites.front_default;
-    this.isShowed = false;
     this.isClicked = false;
   }
 }

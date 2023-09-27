@@ -41,7 +41,6 @@ function App() {
     pokemonIdArr.forEach(rId => {
       allPokemons.forEach(poke => {
         if (poke.id === rId) {
-          poke.isShowed = true;
           pokemonArr.push(poke);
         }
       });
@@ -59,7 +58,6 @@ function App() {
   const endGame = () => {
     allPokemons.forEach(poke => {
       poke.isClicked = false;
-      poke.isShowed = false;
     });
     setScore(0);
     setIsEnd(false);
