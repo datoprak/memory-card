@@ -12,7 +12,7 @@ const Card = ({ poke, handleClick, flip }) => {
           <div className="poke-name">{poke.name}</div>
         </div>
         <div className={back}>
-          <img src="./src/assets/card-back.png" alt="pokemon card back" />
+          <img src="./src/assets/card-back.png" alt="pokemon card back" className="card-back" />
         </div>
       </div>
     </div>
