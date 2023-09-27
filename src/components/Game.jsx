@@ -14,19 +14,15 @@ const Game = ({
     const clickedPokemon = allPokemons.find(poke => poke.id === id);
 
     if (clickedPokemon.isClicked === true) {
-      console.log("you lose");
       if (score > bestScore) setBestScore(score);
       setIsEnd(true);
     } else {
       clickedPokemon.isClicked = true;
       setScore(prev => prev + 1);
-      console.log(`score: ${score}`);
       if (score === 11) {
-        console.log("score 12");
         setBestScore(12);
         setIsEnd(true);
       } else {
-        console.log("score !== 12");
         const clickedPokemons = [];
         allPokemons.filter(poke => {
           if (poke.isClicked === true) clickedPokemons.push(poke);

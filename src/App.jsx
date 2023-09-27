@@ -66,6 +66,8 @@ function App() {
     getPokemonsArr();
   };
 
+  const title = score === 12 ? "YOU WON!" : "GAME OVER!";
+
   return (
     <>
       {isStart && (
@@ -78,7 +80,7 @@ function App() {
       )}
       {isEnd && (
         <Modal
-          title={"GAME OVER!"}
+          title={title}
           message={`Score: ${score} Best Score: ${bestScore}`}
           btn={{ name: "Restart", onClick: endGame }}
         />
