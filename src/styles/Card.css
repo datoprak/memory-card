@@ -1,25 +1,46 @@
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 8px;
   cursor: pointer;
+  min-width: 200px;
+  min-height: 260px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.front {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 200px;
-  min-height: 120px;
-  padding: 8px;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-img {
-  border-radius: 8px 8px 0 0;
+.back > img {
+  width: 100%;
+  height: 100%;
 }
 
 .poke-name {
-  padding: 2px 16px;
+  padding-top: 4px;
 }
+
+.flip, .back {
+  visibility: hidden;
+}
+

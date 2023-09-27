@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Card from "./Card";
 
 const Game = ({
@@ -10,7 +11,11 @@ const Game = ({
   setScore,
   setBestScore,
 }) => {
+  const [flip, setFlip] = useState(false);
+
   const handleClick = id => {
+    setFlip(prev => !prev);
+
     const clickedPokemon = allPokemons.find(poke => poke.id === id);
 
     if (clickedPokemon.isClicked === true) {
@@ -30,12 +35,23 @@ const Game = ({
         getPokemonsArr([...clickedPokemons]);
       }
     }
+
+    setTimeout(() => {
+      setFlip(prev => !prev);
+    }, 500);
   };
 
   return (
     <main>
       {pokemons.map(poke => {
-        return <Card key={poke.id} poke={poke} handleClick={handleClick} />;
+        return (
+          <Card
+            key={poke.id}
+            poke={poke}
+            handleClick={handleClick}
+            flip={flip}
+          />
+        );
       })}
     </main>
   );
