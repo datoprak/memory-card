@@ -1,3 +1,5 @@
+import "../styles/Card.css"
+
 const Card = ({ poke, handleClick }) => {
   return (
     <div className="card" onClick={() => handleClick(poke.id)}>

@@ -69,7 +69,7 @@ function App() {
   const title = score === 12 ? "YOU WON!" : "GAME OVER!";
 
   return (
-    <>
+    <div className="app">
       {isStart && (
         <Modal
           title={"WELCOME!"}
@@ -97,7 +97,7 @@ function App() {
         setScore={setScore}
         setBestScore={setBestScore}
       />
-    </>
+    </div>
   );
 }
 

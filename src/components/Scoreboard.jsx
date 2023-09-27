@@ -1,3 +1,5 @@
+import "../styles/Scoreboard.css"
+
 const Scoreboard = ({ score, bestScore }) => {
   return (
     <div className="scoreboard">
