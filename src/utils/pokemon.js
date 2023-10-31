@@ -1,14 +1,18 @@
 const getAllPokemons = async () => {
-  const allPokemon = [];
-
+  const urls = [];
   for (let i = 1; i < 152; i++) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
-    const data = await response.json();
-    const pokemon = new Pokemon(data);
-    allPokemon.push(pokemon);
+    urls.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
   }
 
-  return allPokemon;
+  const pokes = await Promise.all(
+    urls.map(async url => {
+      const response = await fetch(url);
+      const data = await response.json();
+      return new Pokemon(data);
+    })
+  );
+
+  return pokes;
 };
 
 class Pokemon {
